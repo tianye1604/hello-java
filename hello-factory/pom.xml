@@ -8,4 +8,5 @@
   <artifactId>hello-factory</artifactId>
   <name>hello-factory</name>
   <description>学习设计模式：工厂模式</description>
+  
 </project>
