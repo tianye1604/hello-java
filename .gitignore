@@ -19,3 +19,6 @@ target
 
 /hello-factory/*.classpath
 /hello-factory/*.project
+
+/hello-spring/*.classpath
+/hello-spring/*.project

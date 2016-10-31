@@ -7,16 +7,9 @@
   <packaging>pom</packaging>
   <description>使用maven搭建，学习java中的各种设计模式和各种框架</description>
   
-  <!-- 添加各种底层的依赖 -->
-  <dependencies>
-  		<!-- 添加spring依赖包 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>4.3.3.RELEASE</version>
-		</dependency>
-	</dependencies>
+
   <modules>
+  	<module>hello-spring</module>
   	<module>hello-factory</module>
   </modules>
 </project>
