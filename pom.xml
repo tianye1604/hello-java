@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.study</groupId>
+  <artifactId>hello-java</artifactId>
+  <version>1.0</version>
+  <name>hello-java</name>
+  <packaging>pom</packaging>
+  <description>使用maven搭建，学习java中的各种设计模式和各种框架</description>
+  
+  <!-- 添加各种底层的依赖 -->
+  <dependencies>
+  		<!-- 添加spring依赖包 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.3.3.RELEASE</version>
+		</dependency>
+	</dependencies>
+  <modules>
+  	<module>hello-factory</module>
+  </modules>
+</project>
