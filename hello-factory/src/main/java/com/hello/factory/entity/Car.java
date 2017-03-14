@@ -1,4 +1,5 @@
-package com.hello.factory.study;
+package com.hello.factory.entity;
+
 
 public class Car implements Moveable{
 	public void run(){

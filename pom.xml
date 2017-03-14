@@ -11,5 +11,6 @@
   <modules>
   	<module>hello-spring</module>
   	<module>hello-factory</module>
+  	<module>hello-log4j</module>
   </modules>
 </project>

@@ -1,5 +1,7 @@
 package com.hello.factory.study;
 
+import com.hello.factory.entity.Moveable;
+
 public class Test {
 
 	public static void main(String[] args) {

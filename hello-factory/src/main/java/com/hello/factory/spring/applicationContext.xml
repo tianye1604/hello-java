@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="train" class="com.hello.factory.entity.Train">
+	</bean>
+	<bean id="car" class="com.hello.factory.entity.Car">
+	</bean>
+	<bean id="plane" class="com.hello.factory.entity.Plane">
+	</bean>
+</beans>
