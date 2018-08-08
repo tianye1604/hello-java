@@ -12,6 +12,7 @@
   	<module>hello-spring</module>
   	<module>hello-factory</module>
   	<module>hello-log4j</module>
+      <module>thread-per-message</module>
   </modules>
 
     <dependencies>
