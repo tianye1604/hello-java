@@ -1,10 +1,13 @@
 package com.hello.factory.study;
 
 import com.hello.factory.entity.Moveable;
+import org.junit.Test;
 
-public class Test {
+public class TestRun {
 
-	public static void main(String[] args) {
+
+	@Test
+	public void testRun() {
 		
 //		VihecleFactory factory = new CarFactory();
 		VihecleFactory factory = new PlaneFactory();
