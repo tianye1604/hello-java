@@ -9,8 +9,8 @@ public class TestRun {
 	@Test
 	public void testRun() {
 		
-//		VihecleFactory factory = new CarFactory();
-		VihecleFactory factory = new PlaneFactory();
+		VihecleFactory factory = new CarFactory();
+//		VihecleFactory factory = new PlaneFactory();
 		Moveable m = factory.create();
 		m.run();
 
