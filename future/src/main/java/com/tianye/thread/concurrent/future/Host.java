@@ -26,7 +26,7 @@ public class Host {
         System.out.println("    request(" + count + "," + c + ") BEGIN");
 
         //1、创建FutureData的实例
-        final FutureData future = new FutureData(
+        FutureData future = new FutureData(
                 new Callable<RealData>() {
 
                     public RealData call() throws Exception {
