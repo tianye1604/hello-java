@@ -15,6 +15,7 @@
       <module>thread-per-message</module>
       <module>future</module>
       <module>hello-threadFactory</module>
+      <module>hello-refactoring</module>
   </modules>
 
     <dependencies>
