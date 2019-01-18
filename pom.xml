@@ -16,6 +16,8 @@
       <module>future</module>
       <module>hello-threadFactory</module>
       <module>hello-refactoring</module>
+      <module>hello-httpClient</module>
+      <module>hello-json</module>
   </modules>
 
     <dependencies>
