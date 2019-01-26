@@ -54,6 +54,15 @@ public class Customer {
         return result;
     }
 
+    /**
+     * 提取函数步骤：
+     * 1、找出代码的逻辑泥团，并运用Extact Method
+     * 2、找出这段逻辑泥团代码中的局部变量和参数
+     * 3、任何不被修改的变量都可以被当成参数传入新的函数
+     * 4、如果只有一个变量会被修改，可以把它当作返回值
+     * @param aRental
+     * @return
+     */
     private double amountFor(Rental aRental) {
         double result = 0;
         switch (aRental.getMovie().getPriceCode()) {
