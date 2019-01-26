@@ -14,7 +14,10 @@
   	<module>hello-log4j</module>
       <module>thread-per-message</module>
       <module>future</module>
+      <module>hello-threadFactory</module>
       <module>hello-refactoring</module>
+      <module>hello-httpClient</module>
+      <module>hello-json</module>
   </modules>
 
     <dependencies>
@@ -23,6 +26,12 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
         </dependency>
     </dependencies>
 </project>
