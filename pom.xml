@@ -18,6 +18,7 @@
       <module>hello-refactoring</module>
       <module>hello-httpClient</module>
       <module>hello-json</module>
+      <module>hello-anything</module>
   </modules>
 
     <dependencies>
