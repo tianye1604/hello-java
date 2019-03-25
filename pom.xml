@@ -20,6 +20,7 @@
       <module>hello-json</module>
       <module>hello-anything</module>
       <module>hello-spring-framwork</module>
+      <module>hello-HttpClient</module>
   </modules>
 
     <dependencies>

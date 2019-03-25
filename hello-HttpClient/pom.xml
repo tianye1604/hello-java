@@ -9,7 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hello-httpClient</artifactId>
+    <artifactId>hello-HttpClient</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
 
+    </dependencies>
 
 </project>
