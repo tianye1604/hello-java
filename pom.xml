@@ -21,6 +21,7 @@
       <module>hello-anything</module>
       <module>hello-spring-framwork</module>
       <module>hello-HttpClient</module>
+      <module>hello-pinyin4j</module>
   </modules>
 
     <dependencies>
