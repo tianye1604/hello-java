@@ -2,7 +2,6 @@ package com.study.hello.pinyin4j;
 
 import net.duguying.pinyin.Pinyin;
 import net.duguying.pinyin.PinyinException;
-import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 /**
  * @Auther: Tian.shujian 18066629
