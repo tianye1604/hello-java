@@ -81,7 +81,7 @@ public class HttpClientUtil {
 					.setRetryHandler(new DefaultHttpRequestRetryHandler(0,false)) //设置重试次数,默认是3次;当前是禁用掉(根据需要开启)
 					.build();
 
-			//JVM停止或重启时,关闭连接池释放掉连接(跟数据库连接池类型)\
+			//JVM停止或重启时,关闭连接池释放掉连接(跟数据库连接池类型)
 			Runtime.getRuntime().addShutdownHook(new Thread() {
 				public void run() {
 					try{
