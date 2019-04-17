@@ -22,7 +22,8 @@
       <module>hello-spring-framwork</module>
       <module>hello-HttpClient</module>
       <module>hello-pinyin4j</module>
-      <module>hello-excle</module>
+      <module>hello-excel</module>
+      <module>hello-excelUtil</module>
   </modules>
 
     <dependencies>
