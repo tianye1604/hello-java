@@ -2,8 +2,10 @@ package com.tianye.hello.excel.util;
 
 import com.tianye.hello.excel.annotation.ExcelCell;
 import com.tianye.hello.excel.model.CellModel;
+import com.tianye.hello.excel.model.StyleModel;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.CellType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,11 +59,14 @@ public class ExcelUtil {
 		HSSFSheet sheet = workbook.createSheet(sheetName);
 		Integer startIndex = 0;
 		if(!CollectionUtils.isEmpty(headers)){
-			writeHeader2Sheet(sheet,headers,startIndex);
+			HSSFCellStyle style = StyleUtil.createDefalutHeaderStyle(workbook);
+			writeHeader2Sheet(sheet,headers,style,startIndex);
 			startIndex = headers.size();
 		}
+
 		if(!CollectionUtils.isEmpty(dataset)) {
-			writeData2Sheet(sheet, dataset,startIndex);
+			HSSFCellStyle style = StyleUtil.createDefalutHeaderStyle(workbook);
+			writeData2Sheet(sheet, dataset,style,startIndex);
 		}
 	}
 
@@ -71,12 +76,13 @@ public class ExcelUtil {
 	 * @param headers
 	 * @param startIndex
 	 */
-	public static void writeHeader2Sheet(HSSFSheet sheet,List<String> headers, Integer startIndex) {
+	public static void writeHeader2Sheet(HSSFSheet sheet,List<String> headers,HSSFCellStyle style, Integer startIndex) {
 		Integer rowIndex =  startIndex == null ? 0 : startIndex;
 		for(Integer i=0; i<headers.size();i++){
 			HSSFRow row = sheet.createRow(rowIndex);
 			HSSFCell cell = row.createCell(0);
 			setCellValue(cell,headers.get(i));
+			cell.setCellStyle(style);
 		}
 	}
 
@@ -88,9 +94,10 @@ public class ExcelUtil {
 	 * @param startIndex
 	 * @param <T>
 	 */
-	public static <T> void writeData2Sheet(HSSFSheet sheet, Collection<T> dataset,Integer startIndex)  {
+	public static <T> void writeData2Sheet(HSSFSheet sheet, Collection<T> dataset,HSSFCellStyle style,Integer startIndex)  {
 		Integer rowIndex =  startIndex == null ? 0 : startIndex;
 		List<CellModel> fields = null;
+
 		//遍历集合数据,产生数据行
 		Iterator<T> it = dataset.iterator();
 		Boolean hasTitle = false;
@@ -105,13 +112,18 @@ public class ExcelUtil {
 			try {
 				if(!hasTitle) {
 					String[] titles = getCellTitles(fields);
-					writeTitle2Row(row,titles,collStartIndex);
+
+					writeTitle2Row(row,titles,style,collStartIndex);
 					hasTitle = true;
 					continue;
 				}
-				writeData2Row(row, fields, t, collStartIndex);
+				writeData2Row(row, fields, t,style, collStartIndex);
 			} catch (IllegalAccessException e) {
 				LG.error("填充数据到row异常,t={}",t.toString(),e);
+			}
+			for ( int i = startIndex, isize = fields.size(); i<isize; i++) {
+				//自动调整列宽
+				sheet.autoSizeColumn(i);//i为第几列，需要全文都单元格居中的话，需要遍历所有的列数
 			}
 
 		}
@@ -132,15 +144,16 @@ public class ExcelUtil {
 	}
 
 	/**
-	 *  填充数据到row
+	 * 填充数据到row
 	 * @param row
 	 * @param fields
 	 * @param t
+	 * @param style
 	 * @param startIndex
 	 * @param <T>
 	 * @throws IllegalAccessException
 	 */
-	public static <T> void writeData2Row(HSSFRow row, List<CellModel> fields, T t, Integer startIndex) throws IllegalAccessException {
+	public static <T> void writeData2Row(HSSFRow row, List<CellModel> fields, T t, HSSFCellStyle style,Integer startIndex) throws IllegalAccessException {
 		Integer collIndex = startIndex == null ? 0 : startIndex;
 		for(int i = 0; i<fields.size(); i++){
 			HSSFCell cell = row.createCell(collIndex);
@@ -148,21 +161,26 @@ public class ExcelUtil {
 			field.setAccessible(true);
 			Object value = field.get(t);
 			setCellValue(cell,value);
+			cell.setCellStyle(style);
 			collIndex++;
 		}
 	}
+
 	/**
-	 *  填充标题
+	 * 填充标题
 	 * @param row
 	 * @param titles
+	 * @param style
 	 * @param startIndex
 	 */
-	public static void writeTitle2Row( HSSFRow row,String[] titles,Integer startIndex) {
+	public static void writeTitle2Row( HSSFRow row,String[] titles,HSSFCellStyle style,Integer startIndex) {
+
 		int collIndex = startIndex == null ? 0 : startIndex;
 		for(int i = 0; i < titles.length; i++) {
 			HSSFCell cell = row.createCell(collIndex);
 			HSSFRichTextString text = new HSSFRichTextString(titles[i]);
 			cell.setCellValue(text);
+			cell.setCellStyle(style);
 			collIndex++ ;
 		}
 	}
@@ -176,18 +194,23 @@ public class ExcelUtil {
 		if (value instanceof Integer) {
 			int intValue = (Integer) value;
 			cell.setCellValue(intValue);
+			cell.setCellType(CellType.NUMERIC);
 		} else if (value instanceof Float) {
 			float fValue = (Float) value;
 			cell.setCellValue(fValue);
+			cell.setCellType(CellType.NUMERIC);
 		} else if (value instanceof Double) {
 			double dValue = (Double) value;
 			cell.setCellValue(dValue);
+			cell.setCellType(CellType.NUMERIC);
 		} else if (value instanceof Long) {
 			long longValue = (Long) value;
 			cell.setCellValue(longValue);
+			cell.setCellType(CellType.NUMERIC);
 		} else if (value instanceof Boolean) {
 			boolean bValue = (Boolean) value;
 			cell.setCellValue(bValue);
+			cell.setCellType(CellType.BOOLEAN);
 		} else if (value instanceof Date) {
 			Date date = (Date) value;
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -199,6 +222,7 @@ public class ExcelUtil {
 		if (textValue != null) {
 			HSSFRichTextString richString = new HSSFRichTextString(textValue);
 			cell.setCellValue(richString);
+			cell.setCellType(CellType.STRING);
 		}
 	}
 
