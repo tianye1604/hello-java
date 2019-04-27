@@ -51,11 +51,14 @@ public class StyleModel {
 
 
 	public void loadDefalutHeaderStyle() {
-		loadDefalutStyle();
+		this.brderBottom = BorderStyle.THIN;
+		this.brderTop = BorderStyle.THIN;
+		this.brderLeft = BorderStyle.THIN;
+		this.brderRight = BorderStyle.THIN;
 		this.fontName = "黑体";
 		this.fontSize = (short)14;
-		this.align = HorizontalAlignment.CENTER;
 		this.bold = true;
+		this.align = HorizontalAlignment.CENTER;
 	}
 
 
@@ -114,5 +117,13 @@ public class StyleModel {
 
 	public void setAlign(HorizontalAlignment align) {
 		this.align = align;
+	}
+
+	public Boolean getBold() {
+		return bold;
+	}
+
+	public void setBold(Boolean bold) {
+		this.bold = bold;
 	}
 }

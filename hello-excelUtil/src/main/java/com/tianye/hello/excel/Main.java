@@ -16,6 +16,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 
 		String[] head = {"学生信息表"};
+
 		List studentList = new ArrayList<Student>();
 		studentList.add(new Student("1111","aaa",11,"男","110","北京市西城区",new Date()));
 		studentList.add(new Student("2222","bbbb",12,"男","1101111","北京市朝阳区八里庄",new Date()));

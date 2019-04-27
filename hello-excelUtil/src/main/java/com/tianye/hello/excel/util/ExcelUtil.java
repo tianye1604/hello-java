@@ -112,7 +112,6 @@ public class ExcelUtil {
 			try {
 				if(!hasTitle) {
 					String[] titles = getCellTitles(fields);
-
 					writeTitle2Row(row,titles,style,collStartIndex);
 					hasTitle = true;
 					continue;
