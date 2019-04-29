@@ -23,15 +23,29 @@ public class ExcelUtil {
 
 	private static Logger LG = LoggerFactory.getLogger(ExcelUtil.class);
 
+	/**
+	 *  导入dataset数据到Excel,并将excel输出至输出流
+	 * @param dataset
+	 * @param out
+	 * @param <T>
+	 */
 	public static <T> void exportExcel( Collection<T> dataset, OutputStream out) {
-		exportExcel(null,dataset,out);
+		exportExcel(null,dataset,null,out);
 	}
 
-	public static <T> void exportExcel(List<String> headers, Collection<T> dataset, OutputStream out) {
+	/**
+	 * 导入headers,dataset数据到Excel,并将excel输出至输出流
+	 * 适用于导出单sheet
+	 * @param headers
+	 * @param dataset
+	 * @param out
+	 * @param <T>
+	 */
+	public static <T> void exportExcel(List<String> headers, Collection<T> dataset,String sheetName, OutputStream out) {
 		// 声明一个工作薄
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		// 生成一个表格
-		HSSFSheet sheet = createSheet(workbook,null);
+		HSSFSheet sheet = createSheet(workbook,sheetName);
 		//将数据写入表格
 		Integer rowNum  = 0;
 		if(!CommonUtils.isEmpty(headers)){
@@ -141,16 +155,15 @@ public class ExcelUtil {
 			if(null == fields) {
 				fields = getCellModelList(t.getClass());
 			}
-			Integer collStartIndex = 0;   //列,开始位置
+			if(!hasTitle) {
+				String[] titles = getCellTitles(fields);
+				rowIndex = writeHeader2Sheet(sheet,Arrays.asList(titles),null,rowIndex);
+				hasTitle = true;
+			}
 			try {
-				if(!hasTitle) {
-					String[] titles = getCellTitles(fields);
-					rowIndex = writeHeader2Sheet(sheet,Arrays.asList(titles),null,rowIndex);
-					hasTitle = true;
-				}
 				HSSFRow row = sheet.createRow(rowIndex);
 				HSSFCellStyle dataStyle = CommonUtils.isEmpty(style) ? StyleUtil.createDefalutCellStyle(workbook) : style;
-				writeData2Row(row, fields, t,dataStyle, collStartIndex);
+				writeData2Row(row, fields, t,dataStyle);
 				rowIndex ++;
 			} catch (IllegalAccessException e) {
 				LG.error("填充数据到row异常,t={}",t.toString(),e);
@@ -184,40 +197,20 @@ public class ExcelUtil {
 	 * @param fields
 	 * @param t
 	 * @param style
-	 * @param startIndex
 	 * @param <T>
 	 * @throws IllegalAccessException
 	 */
-	public static <T> void writeData2Row(HSSFRow row, List<CellModel> fields, T t, HSSFCellStyle style,Integer startIndex) throws IllegalAccessException {
-		Integer collIndex = startIndex == null ? 0 : startIndex;
+	public static <T> void writeData2Row(HSSFRow row, List<CellModel> fields, T t, HSSFCellStyle style) throws IllegalAccessException {
 		for(int i = 0; i<fields.size(); i++){
-			HSSFCell cell = row.createCell(collIndex);
+			HSSFCell cell = row.createCell(i);
 			Field field = fields.get(i).getField();
 			field.setAccessible(true);
 			Object value = field.get(t);
 			setCellValue(cell,value);
 			cell.setCellStyle(style);
-			collIndex++;
 		}
 	}
 
-	/**
-	 * 填充标题
-	 * @param row
-	 * @param titles
-	 * @param style
-	 * @param startIndex
-	 */
-	public static void writeTitle2Row( HSSFRow row,String[] titles,HSSFCellStyle style,Integer startIndex) {
-		int collIndex = startIndex == null ? 0 : startIndex;
-		for(int i = 0; i < titles.length; i++) {
-			HSSFCell cell = row.createCell(collIndex);
-			HSSFRichTextString text = new HSSFRichTextString(titles[i]);
-			cell.setCellValue(text);
-			cell.setCellStyle(style);
-			collIndex++ ;
-		}
-	}
 	/**
 	 *  填充表格数据
 	 * @param cell
