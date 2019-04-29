@@ -37,15 +37,15 @@ public class ExcelController {
         studentList.add(new Student("4444","dddd",14,"男","110333333","北京市朝阳区八里庄慈云寺苏宁易购",new Date()));
         studentList.add(new Student("5555","eeee",15,"男","110111111123233","北京市朝阳区八里庄慈云寺苏宁易购14层",new Date()));
 
-        String fileName = "hello.xlsx";
+        String fileName = "hello2.xlsx";
 
         // 告诉浏览器用什么软件可以打开此文件
         response.setHeader("content-Type", "application/vnd.ms-excel");
         // 下载文件的默认名称
         response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(fileName, "utf-8"));
         OutputStream out = response.getOutputStream();
-        ExcelUtil.exportExcel(Arrays.asList(head), studentList, out);
-        out.close();
+        ExcelUtil.exportExcel( studentList, out);
+
 
     }
 

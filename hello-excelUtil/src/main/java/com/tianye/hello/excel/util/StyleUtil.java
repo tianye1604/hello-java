@@ -25,7 +25,14 @@ public class StyleUtil {
 		styleModel.loadDefalutHeaderStyle();
 		return createCellStyle(workbook,styleModel);
 	}
-	public static HSSFCellStyle createCellStyle(HSSFWorkbook workbook, StyleModel model) {
+
+	public static HSSFCellStyle createCellStyle(HSSFWorkbook workbook, StyleModel styleModel) {
+		StyleModel  model = styleModel;
+		if(CommonUtils.isEmpty(model)) {
+			model = new StyleModel();
+			model.loadDefalutHeaderStyle();
+		}
+
 		HSSFCellStyle cellStyle = workbook.createCellStyle();
 
 		//1.设置字体

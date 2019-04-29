@@ -23,9 +23,8 @@ public class Main {
 		studentList.add(new Student("3333","cccc",13,"男","1102222","北京市朝阳区八里庄慈云寺",new Date()));
 		studentList.add(new Student("4444","dddd",14,"男","110333333","北京市朝阳区八里庄慈云寺苏宁易购",new Date()));
 		studentList.add(new Student("5555","eeee",15,"男","110111111123233","北京市朝阳区八里庄慈云寺苏宁易购14层",new Date()));
-		File f=new File("E:/temp/学生信息表2.xls");
+		File f=new File("E:/temp/学生信息表4.xls");
 		OutputStream out =new FileOutputStream(f);
-		ExcelUtil.exportExcel(Arrays.asList(head), studentList, out);
-		out.close();
+		ExcelUtil.exportExcel(studentList, out);
 	}
 }
