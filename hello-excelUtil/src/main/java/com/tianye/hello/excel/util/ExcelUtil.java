@@ -34,6 +34,17 @@ public class ExcelUtil {
 	}
 
 	/**
+	 * 导入dataset数据到Excel,并将excel输出至输出流
+	 * @param dataset
+	 * @param sheetName
+	 * @param out
+	 * @param <T>
+	 */
+	public static <T> void exportExcel( Collection<T> dataset,String sheetName, OutputStream out) {
+		exportExcel(null,dataset,sheetName,out);
+	}
+
+	/**
 	 * 导入headers,dataset数据到Excel,并将excel输出至输出流
 	 * 适用于导出单sheet
 	 * @param headers

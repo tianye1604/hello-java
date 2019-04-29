@@ -25,6 +25,6 @@ public class Main {
 		studentList.add(new Student("5555","eeee",15,"男","110111111123233","北京市朝阳区八里庄慈云寺苏宁易购14层",new Date()));
 		File f=new File("E:/temp/学生信息表4.xls");
 		OutputStream out =new FileOutputStream(f);
-		ExcelUtil.exportExcel(studentList, out);
+		ExcelUtil.exportExcel(studentList,"学生嘻嘻", out);
 	}
 }
