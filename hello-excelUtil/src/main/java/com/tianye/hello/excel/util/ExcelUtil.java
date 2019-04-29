@@ -130,19 +130,17 @@ public class ExcelUtil {
 			if(null == fields) {
 				fields = getCellModelList(t.getClass());
 			}
-			HSSFRow row = sheet.createRow(rowIndex);
-			rowIndex ++;
 			Integer collStartIndex = 0;   //列,开始位置
 			try {
 				if(!hasTitle) {
 					String[] titles = getCellTitles(fields);
-					HSSFCellStyle headerStyle = StyleUtil.createDefalutHeaderStyle(workbook);
-					writeTitle2Row(row,titles,headerStyle,collStartIndex);
+					rowIndex = writeHeader2Sheet(sheet,Arrays.asList(titles),null,rowIndex);
 					hasTitle = true;
-					rowIndex ++;
 				}
+				HSSFRow row = sheet.createRow(rowIndex);
 				HSSFCellStyle dataStyle = CommonUtils.isEmpty(style) ? StyleUtil.createDefalutCellStyle(workbook) : style;
 				writeData2Row(row, fields, t,dataStyle, collStartIndex);
+				rowIndex ++;
 			} catch (IllegalAccessException e) {
 				LG.error("填充数据到row异常,t={}",t.toString(),e);
 			}
