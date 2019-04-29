@@ -1,5 +1,6 @@
 package com.tianye.hello.excel.util;
 
+import com.tianye.hello.excel.model.DefalutStyleModel;
 import com.tianye.hello.excel.model.StyleModel;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -15,22 +16,22 @@ public class StyleUtil {
 
 
 	public static HSSFCellStyle createDefalutCellStyle(HSSFWorkbook workbook) {
-		StyleModel styleModel = new StyleModel();
-		styleModel.loadDefalutStyle();
+		StyleModel styleModel = new DefalutStyleModel();
+		styleModel.loadStyle();
 		return createCellStyle(workbook,styleModel);
 	}
 
 	public static HSSFCellStyle createDefalutHeaderStyle(HSSFWorkbook workbook) {
-		StyleModel styleModel = new StyleModel();
-		styleModel.loadDefalutHeaderStyle();
+		StyleModel styleModel = new DefalutStyleModel();
+		styleModel.loadHeaderStyle();
 		return createCellStyle(workbook,styleModel);
 	}
 
 	public static HSSFCellStyle createCellStyle(HSSFWorkbook workbook, StyleModel styleModel) {
 		StyleModel  model = styleModel;
 		if(CommonUtils.isEmpty(model)) {
-			model = new StyleModel();
-			model.loadDefalutHeaderStyle();
+			model = new DefalutStyleModel();
+			model.loadStyle();
 		}
 
 		HSSFCellStyle cellStyle = workbook.createCellStyle();

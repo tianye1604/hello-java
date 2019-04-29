@@ -8,7 +8,7 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
  * @Date: 2019/4/27 19:06
  * @Description: 样式模型
  */
-public class StyleModel {
+public abstract class StyleModel {
 	//border的常用参数如下
 	//		BorderStyle.NONE 无边框
 	//		BorderStyle.THIN 细边框
@@ -19,10 +19,9 @@ public class StyleModel {
 	private BorderStyle brderTop;// 上边框
 	private BorderStyle brderRight;// 右边框
 
-	private String fontName;
-	private short fontSize;
-
-	private Boolean bold;
+	private String fontName; //字体名称
+	private short fontSize; //字体大小
+	private Boolean bold;	//字体加粗
 
 
 	/**
@@ -38,28 +37,15 @@ public class StyleModel {
 	private HorizontalAlignment align;
 
 
-	public void loadDefalutStyle(){
-		this.fontName = "宋体";
-		this.fontSize = (short)12;
-		this.brderBottom = BorderStyle.THIN;
-		this.brderTop = BorderStyle.THIN;
-		this.brderLeft = BorderStyle.THIN;
-		this.brderRight = BorderStyle.THIN;
-		this.align = HorizontalAlignment.LEFT;
-		this.bold = false;
-	}
+	/**
+	 *  加载style
+	 */
+	public abstract void loadStyle();
 
-
-	public void loadDefalutHeaderStyle() {
-		this.brderBottom = BorderStyle.MEDIUM;
-		this.brderTop = BorderStyle.MEDIUM;
-		this.brderLeft = BorderStyle.MEDIUM;
-		this.brderRight = BorderStyle.MEDIUM;
-		this.fontName = "黑体";
-		this.fontSize = (short)16;
-		this.bold = true;
-		this.align = HorizontalAlignment.CENTER;
-	}
+	/**
+	 *  加载表头style
+	 */
+	public abstract void loadHeaderStyle();
 
 
 
