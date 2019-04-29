@@ -3,6 +3,7 @@ package com.tianye.hello.excel.util;
 import com.tianye.hello.excel.annotation.ExcelCell;
 import com.tianye.hello.excel.model.CellModel;
 import com.tianye.hello.excel.model.StyleModel;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.CellType;
@@ -39,7 +40,25 @@ public class ExcelUtil {
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		String sheetName = "学生信息";
 		// 生成一个表格
-		createSheet(workbook, headers, dataset, sheetName);
+		HSSFSheet sheet = createSheet(workbook,sheetName);
+		Integer startIndex = 0;
+		Boolean hasHeader = false;
+		if(!CollectionUtils.isEmpty(headers)){
+			HSSFCellStyle style = StyleUtil.createDefalutHeaderStyle(workbook);
+			writeHeader2Sheet(sheet,headers,style,startIndex);
+			for ( int i = startIndex, isize = headers.size(); i<isize; i++) {
+				//自动调整列宽
+				sheet.autoSizeColumn(i);//i为第几列，需要全文都单元格居中的话，需要遍历所有的列数
+			}
+
+			startIndex++;
+			hasHeader = true;
+		}
+
+		if(!CollectionUtils.isEmpty(dataset)) {
+			HSSFCellStyle style = StyleUtil.createDefalutCellStyle(workbook);
+			writeData2Sheet(sheet, dataset,style,hasHeader,startIndex);
+		}
 		try {
 			workbook.write(out);
 		} catch (IOException e) {
@@ -50,24 +69,13 @@ public class ExcelUtil {
 	/**
 	 *  // 生成一个表格sheet,并导出数据
 	 * @param workbook
-	 * @param headers
-	 * @param dataset
 	 * @param sheetName
 	 * @param <T>
 	 */
-	public static <T> void createSheet(HSSFWorkbook workbook, List<String> headers, Collection<T> dataset, String sheetName) {
-		HSSFSheet sheet = workbook.createSheet(sheetName);
-		Integer startIndex = 0;
-		if(!CollectionUtils.isEmpty(headers)){
-			HSSFCellStyle style = StyleUtil.createDefalutHeaderStyle(workbook);
-			writeHeader2Sheet(sheet,headers,style,startIndex);
-			startIndex = headers.size();
-		}
-
-		if(!CollectionUtils.isEmpty(dataset)) {
-			HSSFCellStyle style = StyleUtil.createDefalutHeaderStyle(workbook);
-			writeData2Sheet(sheet, dataset,style,startIndex);
-		}
+	public static <T> HSSFSheet createSheet(HSSFWorkbook workbook,String sheetName) {
+		String name = CommonUtils.isEmpty(sheetName) ? "sheet1" : sheetName;
+		HSSFSheet sheet = workbook.createSheet(name);
+		return sheet;
 	}
 
 	/**
@@ -78,9 +86,9 @@ public class ExcelUtil {
 	 */
 	public static void writeHeader2Sheet(HSSFSheet sheet,List<String> headers,HSSFCellStyle style, Integer startIndex) {
 		Integer rowIndex =  startIndex == null ? 0 : startIndex;
+		HSSFRow row = sheet.createRow(rowIndex);
 		for(Integer i=0; i<headers.size();i++){
-			HSSFRow row = sheet.createRow(rowIndex);
-			HSSFCell cell = row.createCell(0);
+			HSSFCell cell = row.createCell(i);
 			setCellValue(cell,headers.get(i));
 			cell.setCellStyle(style);
 		}
@@ -94,13 +102,13 @@ public class ExcelUtil {
 	 * @param startIndex
 	 * @param <T>
 	 */
-	public static <T> void writeData2Sheet(HSSFSheet sheet, Collection<T> dataset,HSSFCellStyle style,Integer startIndex)  {
+	public static <T> void writeData2Sheet(HSSFSheet sheet, Collection<T> dataset,HSSFCellStyle style,Boolean hasHeader,Integer startIndex)  {
 		Integer rowIndex =  startIndex == null ? 0 : startIndex;
+		Boolean hasTitle = CommonUtils.isEmpty(hasHeader) ? false : hasHeader;
 		List<CellModel> fields = null;
 
 		//遍历集合数据,产生数据行
 		Iterator<T> it = dataset.iterator();
-		Boolean hasTitle = false;
 		while (it.hasNext()) {
 			T t = it.next();
 			if(null == fields) {

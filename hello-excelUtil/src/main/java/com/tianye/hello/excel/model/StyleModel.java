@@ -51,12 +51,12 @@ public class StyleModel {
 
 
 	public void loadDefalutHeaderStyle() {
-		this.brderBottom = BorderStyle.THIN;
-		this.brderTop = BorderStyle.THIN;
-		this.brderLeft = BorderStyle.THIN;
-		this.brderRight = BorderStyle.THIN;
+		this.brderBottom = BorderStyle.MEDIUM;
+		this.brderTop = BorderStyle.MEDIUM;
+		this.brderLeft = BorderStyle.MEDIUM;
+		this.brderRight = BorderStyle.MEDIUM;
 		this.fontName = "黑体";
-		this.fontSize = (short)14;
+		this.fontSize = (short)16;
 		this.bold = true;
 		this.align = HorizontalAlignment.CENTER;
 	}
