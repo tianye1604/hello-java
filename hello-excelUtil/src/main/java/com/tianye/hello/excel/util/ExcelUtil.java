@@ -3,13 +3,13 @@ package com.tianye.hello.excel.util;
 import com.tianye.hello.excel.annotation.ExcelCell;
 import com.tianye.hello.excel.model.CellModel;
 import com.tianye.hello.excel.model.StyleModel;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.CellType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -35,13 +35,15 @@ public class ExcelUtil {
 		//将数据写入表格
 		Integer rowNum  = 0;
 		if(!CommonUtils.isEmpty(headers)){
-			rowNum = writeHeader2Sheet(sheet,headers,null,null);
+			rowNum = writeHeader2Sheet(sheet,headers);
 		}
 		rowNum =  writeData2Sheet(sheet,dataset,null, rowNum>0,rowNum);
 		LG.info("excel记录数为:{}行",rowNum);
 		//将工作表导出
 		exportExcel(workbook,out);
 	}
+
+
 	/**
 	 *  文件输出
 	 * @param workbook 填充好内容的workbook
@@ -74,6 +76,15 @@ public class ExcelUtil {
 		String name = CommonUtils.isEmpty(sheetName) ? "sheet1" : sheetName;
 		HSSFSheet sheet = workbook.createSheet(name);
 		return sheet;
+	}
+
+	/**
+	 * 	填写sheet页的表头
+	 * @param sheet
+	 * @param headers
+	 */
+	private static Integer writeHeader2Sheet(HSSFSheet sheet, List<String> headers) {
+		return writeHeader2Sheet(sheet,headers,null,null);
 	}
 
 	/**
