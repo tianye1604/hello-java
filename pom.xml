@@ -24,6 +24,7 @@
       <module>hello-pinyin4j</module>
       <module>hello-excel</module>
       <module>hello-excelUtil</module>
+      <module>hello-util</module>
   </modules>
 
     <dependencies>

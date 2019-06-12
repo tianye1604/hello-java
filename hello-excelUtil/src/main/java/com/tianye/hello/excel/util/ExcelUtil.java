@@ -3,14 +3,18 @@ package com.tianye.hello.excel.util;
 import com.tianye.hello.excel.annotation.ExcelCell;
 import com.tianye.hello.excel.model.CellModel;
 import com.tianye.hello.excel.model.StyleModel;
+import com.tianye.hello.util.CommonUtils;
+import com.tianye.hello.util.DateUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.CellType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -23,6 +27,42 @@ public class ExcelUtil {
 
 	private static Logger LG = LoggerFactory.getLogger(ExcelUtil.class);
 
+	/**
+	 *  导出excel到网络流
+	 * @param response
+	 * @param dataset
+	 * @param fileName
+	 * @param <T>
+	 * @throws IOException
+	 */
+	public static <T> void  exportExcel(HttpServletResponse response, Collection<T> dataset, String fileName) throws IOException {
+		// 告诉浏览器用什么软件可以打开此文件
+		response.setHeader("content-Type", "application/vnd.ms-excel");
+		// 下载文件的默认名称
+		response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(fileName, "utf-8"));
+		//获取输出流
+		OutputStream out = response.getOutputStream();
+		//导出数据
+		ExcelUtil.exportExcel(dataset, out);
+	}
+
+	public static String getFileName(Date start,Date end, String wechatName, String serviceName) {
+		String startDate = DateUtils.getFormatDate(start,DateUtils.SIMPLE_DATE_PATTERN);
+		String endDate = DateUtils.getFormatDate(end,DateUtils.SIMPLE_DATE_PATTERN);
+		String nowStamp = DateUtils.getNowStampStr();
+		StringBuilder builder = new StringBuilder();
+		return builder.append(wechatName)
+				.append("-")
+				.append(serviceName)
+				.append("-")
+				.append(startDate)
+				.append("-")
+				.append(endDate)
+				.append("_")
+				.append(nowStamp)
+				.append(".xls")
+				.toString();
+	}
 	/**
 	 *  导入dataset数据到Excel,并将excel输出至输出流
 	 * @param dataset
@@ -74,7 +114,7 @@ public class ExcelUtil {
 	 * @param workbook 填充好内容的workbook
 	 * @param out
 	 */
-	public static<T>  void exportExcel (HSSFWorkbook workbook,OutputStream out) {
+	public static<T>  void exportExcel (HSSFWorkbook workbook, OutputStream out) {
 
 		try {
 			workbook.write(out);
@@ -97,7 +137,7 @@ public class ExcelUtil {
 	 * @param sheetName
 	 * @param <T>
 	 */
-	public static <T> HSSFSheet createSheet(HSSFWorkbook workbook,String sheetName) {
+	public static <T> HSSFSheet createSheet(HSSFWorkbook workbook, String sheetName) {
 		String name = CommonUtils.isEmpty(sheetName) ? "sheet1" : sheetName;
 		HSSFSheet sheet = workbook.createSheet(name);
 		return sheet;
@@ -148,7 +188,7 @@ public class ExcelUtil {
 	 * @param startIndex
 	 * @param <T>
 	 */
-	public static <T> Integer writeData2Sheet(HSSFSheet sheet, Collection<T> dataset,StyleModel styleModel,Boolean hasHeader,Integer startIndex)  {
+	public static <T> Integer writeData2Sheet(HSSFSheet sheet, Collection<T> dataset, StyleModel styleModel, Boolean hasHeader, Integer startIndex)  {
 		Integer rowIndex =  startIndex == null ? 0 : startIndex;
 		if(CommonUtils.isEmpty(sheet) || CommonUtils.isEmpty(dataset)){
 			LG.error("sheet的写入参数有误,sheet={},dataset={}",sheet,dataset);
@@ -251,7 +291,7 @@ public class ExcelUtil {
 			cell.setCellType(CellType.BOOLEAN);
 		} else if (value instanceof Date) {
 			Date date = (Date) value;
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			textValue = sdf.format(date);
 		}else {
 			// 其它数据类型都当作字符串简单处理
@@ -271,7 +311,7 @@ public class ExcelUtil {
 	 */
 	private static List<CellModel> getCellModelList(Class<?> clazz) {
 		Field[] fieldsArr = clazz.getDeclaredFields();
-		List<CellModel> fields = new ArrayList<>();
+		List<CellModel> fields = new ArrayList<CellModel>();
 		for (Field filed : fieldsArr) {
 			ExcelCell ec = filed.getAnnotation(ExcelCell.class);
 			if(ec == null) {

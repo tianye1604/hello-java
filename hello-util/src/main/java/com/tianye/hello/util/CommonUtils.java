@@ -1,4 +1,4 @@
-package com.tianye.hello.excel.util;
+package com.tianye.hello.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,11 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
 
-/**
- * @author chen shi(18066693)
- * @date 2018年8月4日
- */
-@SuppressWarnings("rawtypes")
+
 public class CommonUtils {
 	private static Logger LOGGER = LoggerFactory.getLogger(CommonUtils.class);
 

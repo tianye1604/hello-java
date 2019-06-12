@@ -1,7 +1,6 @@
 package com.tianye.hello.excel.model;
 
 import java.lang.reflect.Field;
-import java.util.Objects;
 
 /**
  * The <code>CellModel</code>
@@ -86,11 +85,11 @@ public class CellModel implements Comparable<CellModel> {
         if (o == null || getClass() != o.getClass())
             return false;
         CellModel that = (CellModel) o;
-        return index == that.index;
+        return this.hashCode() == that.hashCode();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(index);
+        return field.hashCode() + title.hashCode() + index;
     }
 }

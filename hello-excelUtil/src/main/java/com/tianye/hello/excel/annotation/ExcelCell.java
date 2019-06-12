@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @Auther: Tian.shujian 18066629
  * @Date: 2019/4/26 15:59
- * @Description:
+ * @Description: 导出excel注解,标识顺序和标题
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
@@ -31,6 +31,5 @@ public @interface ExcelCell {
 	 * @return title
 	 */
 	String title() default "";
-
 
 }
