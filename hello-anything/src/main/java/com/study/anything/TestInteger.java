@@ -1,5 +1,7 @@
 package com.study.anything;
 
+import com.sun.deploy.util.StringUtils;
+
 /**
  * @Auther: Tian.shujian 18066629
  * @Date: 2019/2/15 14:04
@@ -24,5 +26,8 @@ public class TestInteger {
 		Boolean f4 = c.equals(d);
 		System.out.println("f3: " + f3); // true
 		System.out.println("f4: " + f4); // true
+		Long id = 15236958L;
+		Long mod = id % 32;
+		System.out.println(mod);
 	}
 }
