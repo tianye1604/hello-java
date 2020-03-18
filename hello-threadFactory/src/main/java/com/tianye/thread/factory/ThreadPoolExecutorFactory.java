@@ -36,11 +36,11 @@ public class ThreadPoolExecutorFactory {
     /**
      * corePoolSize 核心线程数
      */
-    private static final int corePoolSize = 40;
+    private static final int corePoolSize = 10;
     /**
      * maximumPoolSize 最大线程数
      */
-    private static final int maximumPoolSize = 40;
+    private static final int maximumPoolSize = 10;
     /**
      * keepAliveTime 当线程数大于核心数时，此为终止前多余的空闲线程等待新任务的最长时间，线程池维护线程所允许的空闲时间
      */
@@ -48,7 +48,7 @@ public class ThreadPoolExecutorFactory {
     /**
      * 执行前用于保持任务的队列（缓冲队列）
      */
-    private static final int capacity = 300;
+    private static final int capacity = 60000;
 
     /**
      * 线程池对象
@@ -67,8 +67,8 @@ public class ThreadPoolExecutorFactory {
                                 maximumPoolSize,
                                 keepAliveTime,
                                 TimeUnit.MILLISECONDS,
-                                new LinkedBlockingQueue<Runnable>(),
-                                new ThreadPoolExecutor.AbortPolicy()
+                                new LinkedBlockingQueue<Runnable>(capacity),
+                                new ThreadPoolExecutor.CallerRunsPolicy()
                                 );
                     }
                     threadPoolExecutor = t;
