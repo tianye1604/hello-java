@@ -7,7 +7,7 @@ import java.util.concurrent.*;
  * Create Date: 2020/1/19 18:05
  * Description: ${DESCRIPTION}
  */
-public class ThreadExceptionTest {
+public class ThreadExceptionTest2 {
 
 	public static void main(String[] args) throws InterruptedException {
 
