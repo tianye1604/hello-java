@@ -12,6 +12,9 @@ public class BigDecimalTest {
 	public static void main(String[] args) {
 		BigDecimal canStealGold = new BigDecimal(100.911);
 		BigDecimal reduceValue = new BigDecimal(0).subtract(canStealGold);
-		System.out.printf(String.valueOf(reduceValue.longValue()));
+		System.out.println(String.valueOf(reduceValue.longValue()));
+
+		System.out.println("1   :   " + reduceValue.compareTo(null));
+
 	}
 }
