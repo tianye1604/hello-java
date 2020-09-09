@@ -1,5 +1,8 @@
 package com.tianye.thread.lock;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -48,5 +51,7 @@ public class TestLock {
 		System.out.println("线程不安全：" + value1);
 		System.out.println("乐观锁(AtomicInteger)：" + value2);
 		System.out.println("悲观锁(synchronized)：" + value3);
+		Deque<Integer> stack  = new ArrayDeque<>();
+		DelayQueue delayQueue = new DelayQueue();
 	}
 }
