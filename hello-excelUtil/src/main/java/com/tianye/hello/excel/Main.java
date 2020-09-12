@@ -35,9 +35,11 @@ public class Main {
 		registerDTO.setBankcode("110110");
 		registerDTO.setBankcardNo("123456789");
 		registerDTO.setContact("田书建");
+		registerDTO.setIdCardType("PRC_ID");
 
 		Map<String,Object> result = RequestFieldUtil.toFieldMap(registerDTO);
 
-		System.out.println(result.keySet());
+
+		System.out.println(result);
 	}
 }

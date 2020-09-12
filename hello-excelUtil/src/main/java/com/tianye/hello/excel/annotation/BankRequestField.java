@@ -29,4 +29,19 @@ public @interface BankRequestField {
 	 **/
 	String desc() default "";
 
+	/***
+	 * 是否为枚举
+	 **/
+	boolean isEnum() default false;
+
+	/***
+	 * 属性取值范围
+	 **/
+	String[] valueArea() default {};
+
+	Class<?> valueType() default Void.class;
+
+
+
+
 }
