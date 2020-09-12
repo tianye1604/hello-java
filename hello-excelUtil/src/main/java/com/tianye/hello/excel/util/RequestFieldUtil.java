@@ -1,6 +1,8 @@
 package com.tianye.hello.excel.util;
 
 import com.tianye.hello.excel.annotation.RequestField;
+import com.tianye.hello.util.EnumUtil;
+import com.tianye.hello.util.enums.BankEnum;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -39,8 +41,19 @@ public class RequestFieldUtil {
 
 	private static void checkValueLegality(RequestField annotation, Object value) {
 		checkValueCanNull(annotation,value);
-		checkValueArea(annotation,value);
+//		checkValueArea(annotation,value);
+		checkValueType(annotation,value);
 		checkValueLength(annotation,value);
+	}
+
+	private static void checkValueType(RequestField annotation, Object value) {
+		if (annotation.isEnum() && Objects.nonNull(value)) {
+			Class<? extends BankEnum> bankEnum = annotation.valueType();
+			BankEnum be = EnumUtil.getByName(value.toString(),bankEnum);
+			if(Objects.isNull(be)) {
+				throw new RuntimeException(annotation.desc() + ":" + annotation.name() + "=" + value + ",不在合法取值范围，取值范围为：" + Arrays.toString(EnumUtil.getNames(bankEnum)) );
+			}
+		}
 	}
 
 	/***

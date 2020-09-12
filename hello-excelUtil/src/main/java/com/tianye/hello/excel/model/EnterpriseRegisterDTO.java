@@ -1,6 +1,7 @@
 package com.tianye.hello.excel.model;
 
 import com.tianye.hello.excel.annotation.RequestField;
+import com.tianye.hello.excel.enums.BankIdTypeEnum;
 
 import java.io.Serializable;
 
@@ -45,7 +46,7 @@ public class EnterpriseRegisterDTO implements Serializable {
 	private String legal;
 
 	//证件类型 必填
-	@RequestField(name="idCardType",desc = "证件类型",canNull = true,isEnum = true,valueArea = {"PRC_ID"})
+	@RequestField(name="idCardType",desc = "证件类型",canNull = true,isEnum = true,valueType = BankIdTypeEnum.class)
 	private String idCardType;
 
 	//法人证件号 必填

@@ -1,5 +1,7 @@
 package com.tianye.hello.excel.annotation;
 
+import com.tianye.hello.util.enums.BankEnum;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -44,7 +46,6 @@ public @interface RequestField {
 	 **/
 	int maxLength() default 50;
 
-
-
+	Class<? extends BankEnum> valueType() default BankEnum.class;
 
 }
