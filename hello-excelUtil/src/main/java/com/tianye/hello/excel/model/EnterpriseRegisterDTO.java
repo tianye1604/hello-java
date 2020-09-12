@@ -1,6 +1,6 @@
 package com.tianye.hello.excel.model;
 
-import com.tianye.hello.excel.annotation.BankRequestField;
+import com.tianye.hello.excel.annotation.RequestField;
 
 import java.io.Serializable;
 
@@ -13,63 +13,63 @@ public class EnterpriseRegisterDTO implements Serializable {
 	private static final long serialVersionUID = 1275493602989079698L;
 
 	//企业名称 必填
-	@BankRequestField(name="enterpriseName",desc = "企业名称",canNull = false)
+	@RequestField(name="enterpriseName",desc = "企业名称",canNull = false)
 	private String enterpriseName;
 
 	//开户银行许可证核准号
-	@BankRequestField(name="bankLicense",desc = "开户银行许可证核准号",canNull = false)
+	@RequestField(name="bankLicense",desc = "开户银行许可证核准号",canNull = false)
 	private String bankLicense;
 
 	//组织机构代码
-	@BankRequestField(name="orgNo",desc = "组织机构代码",canNull = true)
+	@RequestField(name="orgNo",desc = "组织机构代码",canNull = true)
 	private String orgNo;
 
 	//营业执照编号
-	@BankRequestField(name="businessLicense",desc = "营业执照编号",canNull = true)
+	@RequestField(name="businessLicense",desc = "营业执照编号",canNull = true)
 	private String businessLicense;
 
 	//税务登记号
-	@BankRequestField(name="taxNo",desc = "税务登记号",canNull = true)
+	@RequestField(name="taxNo",desc = "税务登记号",canNull = true)
 	private String taxNo;
 
 	//统一社会信用代码（可替代营业执照编号、税务登记号、组织机构代码此三证），统一社会信用代码和三证信息两者必须有一个传入
-	@BankRequestField(name="unifiedCode",desc = "统一社会信用代码",canNull = true)
+	@RequestField(name="unifiedCode",desc = "统一社会信用代码",canNull = true)
 	private String unifiedCode;
 
 	//机构信用代码
-	@BankRequestField(name="creditCode",desc = "机构信用代码",canNull = true)
+	@RequestField(name="creditCode",desc = "机构信用代码",canNull = true)
 	private String creditCode;
 
 	//法人姓名 必填
-	@BankRequestField(name="legal",desc = "法人姓名",canNull = true)
+	@RequestField(name="legal",desc = "法人姓名",canNull = true)
 	private String legal;
 
 	//证件类型 必填
-	@BankRequestField(name="idCardType",desc = "证件类型",canNull = true,isEnum = true,valueArea = {"PRC_ID"})
+	@RequestField(name="idCardType",desc = "证件类型",canNull = true,isEnum = true,valueArea = {"PRC_ID"})
 	private String idCardType;
 
 	//法人证件号 必填
-	@BankRequestField(name="legalIdCardNo",desc = "法人证件号",canNull = true)
+	@RequestField(name="legalIdCardNo",desc = "法人证件号",canNull = true)
 	private String legalIdCardNo;
 
 	//企业联系人 必填
-	@BankRequestField(name="contact",desc = "企业联系人",canNull = true)
+	@RequestField(name="contact",desc = "企业联系人",canNull = true)
 	private String contact;
 
 	//联系人手机号 必填
-	@BankRequestField(name="contactPhone",desc = "联系人手机号",canNull = true)
+	@RequestField(name="contactPhone",desc = "联系人手机号",canNull = true)
 	private String contactPhone;
 
 	//企业对公账号 必填
-	@BankRequestField(name="bankcardNo",desc = "企业对公账号",canNull = true)
+	@RequestField(name="bankcardNo",desc = "企业对公账号",canNull = true)
 	private String bankcardNo;
 
 	//银行编码 必填
-	@BankRequestField(name="bankcode",desc = "银行编码",canNull = true)
+	@RequestField(name="bankcode",desc = "银行编码",canNull = true)
 	private String bankcode;
 
 	//短信验证码下发请求流水号
-	@BankRequestField(name="codeRequestNo",desc = "短信验证码下发请求流水号",canNull = true)
+	@RequestField(name="codeRequestNo",desc = "短信验证码下发请求流水号",canNull = true)
 	private String codeRequestNo;
 
 

@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface BankRequestField {
+public @interface RequestField {
 
 	/**
 	 * 名称
@@ -39,7 +39,10 @@ public @interface BankRequestField {
 	 **/
 	String[] valueArea() default {};
 
-	Class<?> valueType() default Void.class;
+	/***
+	 * 最大长度值
+	 **/
+	int maxLength() default 50;
 
 
 

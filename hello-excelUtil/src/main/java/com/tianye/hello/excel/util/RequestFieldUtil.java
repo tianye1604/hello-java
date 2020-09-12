@@ -1,6 +1,6 @@
 package com.tianye.hello.excel.util;
 
-import com.tianye.hello.excel.annotation.BankRequestField;
+import com.tianye.hello.excel.annotation.RequestField;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -21,7 +21,7 @@ public class RequestFieldUtil {
 		Field[] fieldsArr = clazz.getDeclaredFields();
 		Map<String,Object> filedMap = new HashMap<>();
 		for (Field field : fieldsArr) {
-			BankRequestField annotation = field.getAnnotation(BankRequestField.class);
+			RequestField annotation = field.getAnnotation(RequestField.class);
 			if(annotation != null) {
 				// 没有Excell Annotation 视为不汇入
 				String name = annotation.name();
@@ -37,9 +37,23 @@ public class RequestFieldUtil {
 		return filedMap;
 	}
 
-	private static void checkValueLegality(BankRequestField annotation, Object value) {
+	private static void checkValueLegality(RequestField annotation, Object value) {
 		checkValueCanNull(annotation,value);
 		checkValueArea(annotation,value);
+		checkValueLength(annotation,value);
+	}
+
+	/***
+	 * @Description 检查取值长度
+	 * @Author tianshujian
+	 * @Date 19:09 2020/9/12
+	 **/
+	private static void checkValueLength(RequestField annotation, Object value) {
+		if(Objects.nonNull(value) && value instanceof  String) {
+			if(value.toString().length() > annotation.maxLength()) {
+				throw new RuntimeException(annotation.desc() + ":" + annotation.name() + "=" + value + ",长度超出约定界限，约定界限为：" + annotation.maxLength() );
+			}
+		}
 	}
 
 	/***
@@ -47,7 +61,7 @@ public class RequestFieldUtil {
 	 * @Author tianshujian
 	 * @Date 18:52 2020/9/12
 	 **/
-	private static void checkValueCanNull(BankRequestField annotation, Object value) {
+	private static void checkValueCanNull(RequestField annotation, Object value) {
 		if(!annotation.canNull() && Objects.isNull(value)) {
 			throw new RuntimeException(annotation.desc() + ":" + annotation.name() + "不能为空");
 		}
@@ -58,7 +72,7 @@ public class RequestFieldUtil {
 	 * @Author tianshujian
 	 * @Date 18:52 2020/9/12
 	 **/
-	private static void checkValueArea(BankRequestField annotation, Object value) {
+	private static void checkValueArea(RequestField annotation, Object value) {
 
 		boolean isValueFit = annotation.isEnum() ? false : true;
 		if (annotation.isEnum() && Objects.nonNull(value)) {
