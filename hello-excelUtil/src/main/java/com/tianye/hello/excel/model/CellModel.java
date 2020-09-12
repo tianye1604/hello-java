@@ -70,7 +70,6 @@ public class CellModel implements Comparable<CellModel> {
         this.title = title;
     }
 
-    @Override
     public int compareTo(CellModel field) {
         if (field == null) {
             return 1;
