@@ -27,6 +27,7 @@
       <module>hello-util</module>
       <module>hello-ejob</module>
       <module>hello-easyexcel</module>
+      <module>hello-designpattern</module>
   </modules>
 
     <dependencies>
