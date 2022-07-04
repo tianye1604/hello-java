@@ -6,6 +6,7 @@
         <artifactId>hello-java</artifactId>
         <groupId>com.study</groupId>
         <version>1.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,8 +16,7 @@
         <!-- 添加spring依赖包 -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>5.0.0.RC3</version>
+            <artifactId>spring-context</artifactId>
         </dependency>
 
     </dependencies>

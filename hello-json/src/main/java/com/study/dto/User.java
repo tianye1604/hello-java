@@ -1,5 +1,7 @@
 package com.study.dto;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,6 +15,7 @@ public class User implements Serializable {
 	private String name;
 	private Integer age;
 	private Boolean sex;
+	@JSONField(name="a")
 	private String nickName;
 	private Date birthDay;
 	private Double salary;

@@ -1,5 +1,6 @@
 package com.hello.spring.framwork.container;
 
+import com.hello.spring.framework.container.MyTestBean;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;

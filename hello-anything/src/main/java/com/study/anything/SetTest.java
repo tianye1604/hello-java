@@ -1,5 +1,7 @@
 package com.study.anything;
 
+import com.jd.fastjson.JSON;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +21,7 @@ public class SetTest {
 		set.add("bbb");
 		set.add("ccc");
 		set.add("ddd");
+		System.out.println(JSON.toJSON(set));
 
 		//1. list构造方法
 		List<String> list = new ArrayList<>(set);

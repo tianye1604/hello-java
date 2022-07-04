@@ -1,5 +1,7 @@
 package com.study.anything;
 
+import java.util.Objects;
+
 /**
  * Created by tianshujian
  * Create Date: 2019/12/11 10:27
@@ -11,5 +13,14 @@ public class IntTest {
 		System.out.println(a == b);
 		System.out.println(c == d);
 		System.out.println(c.equals(d));
+
+
+		Float f = 2.0f;
+		int v = f.intValue();
+		int sort = Objects.isNull(f) ? 0: f.intValue();
+		System.out.println(v);
+		System.out.println(sort);
+
+
 	}
 }
