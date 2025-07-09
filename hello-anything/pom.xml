@@ -39,6 +39,17 @@
         <artifactId>jsf</artifactId>
         <version>1.7.2</version>
     </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jd.xbp</groupId>
+            <artifactId>client</artifactId>
+            <version>3.4.0</version>
+        </dependency>
     </dependencies>
 
 

@@ -24,7 +24,7 @@
       <module>hello-httpClient</module>
       <module>hello-json</module>
       <module>hello-anything</module>
-      <module>hello-spring-framwork</module>
+      <module>hello-spring-framework</module>
       <module>hello-HttpClient</module>
       <module>hello-pinyin4j</module>
       <module>hello-excel</module>
@@ -33,6 +33,8 @@
       <module>hello-ejob</module>
       <module>hello-easyexcel</module>
       <module>hello-designpattern</module>
+      <module>hello-web</module>
+
   </modules>
 
     <dependencyManagement>

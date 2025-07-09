@@ -11,6 +11,8 @@ public class UserInfo implements Serializable {
     private String tenantId;
     private Long shopId;
     private Long merchantId;
+    private Integer age;
+    private Integer grade;
 
     public Long getUserId() {
         return userId;
@@ -50,5 +52,21 @@ public class UserInfo implements Serializable {
 
     public void setMerchantId(Long merchantId) {
         this.merchantId = merchantId;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
 }

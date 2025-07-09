@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hello-spring-framwork</artifactId>
+    <artifactId>hello-spring-framework</artifactId>
     <!-- 添加各种公共底层的依赖 -->
     <dependencies>
         <!-- 添加spring依赖包 -->
